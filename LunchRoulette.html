@@ -1,0 +1,40 @@
+<head>
+  <title>Lunch Roulette</title>
+</head>
+
+<body>
+  {{> signUp}}
+</body>
+
+<template name="signUp">
+    <h1>Welcome to Lunch Roulette</h1>
+  <form>
+    <input type="text" class="name" placeholder="Your Name" />
+    <input type="email" class="email" placeholder="email" />
+    <input type="text" class="phone" placeholder="##########" />
+    <button class="submit">submit</button>
+    </form>
+  {{> list}}
+  {{> grouplist}}
+</template>
+
+<template name="list">
+  {{# each peopleInPool}}
+    {{> people}}
+  {{/each}}
+</template>
+
+<template name="people">
+  <h1>{{name}} is down</h1>
+</template>
+
+<template name="grouplist">
+  {{#each groupsMade}}
+    {{> group}}
+  {{/each}}
+</template>
+
+<template name="group">
+  <h1>Group {{number}}</h1>
+  {{people}}
+</template>
