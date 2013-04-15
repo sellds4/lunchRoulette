@@ -1,1 +1,19 @@
 /* CSS declarations go here */
+
+.calendar {
+
+}
+
+.people {
+	font-weight: none;
+}
+
+.days {
+	float: left;
+	position: relative;
+	margin: 20px;
+}
+
+.hiddenday {
+	display: none;
+}

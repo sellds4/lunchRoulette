@@ -4,37 +4,92 @@
 
 <body>
   {{> signUp}}
+  {{> today}}
+  {{> calendar}}
 </body>
 
 <template name="signUp">
     <h1>Welcome to Lunch Roulette</h1>
   <form>
-    <input type="text" class="name" placeholder="Your Name" />
-    <input type="email" class="email" placeholder="email" />
-    <input type="text" class="phone" placeholder="##########" />
+    Name: <input type="text" class="name" placeholder="Your Name" />
+    Email: <input type="email" class="email" placeholder="email" />
+    Phone: <input type="text" class="phone" placeholder="##########" />
+    Date: <select type='dropdown' class='day' selected='Pick a day!'>
+              <option value='%s' selected='selected'>Pick a day!</option>
+              <option value="Friday">Friday</option>
+              <option value="Saturday">Saturday</option>
+              <option value="Sunday">Sunday</option>
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+          </select>
     <button class="submit">submit</button>
     </form>
-  {{> list}}
-  {{> grouplist}}
 </template>
 
-<template name="list">
-  {{# each peopleInPool}}
+<template name="today">
+  <container class="todaysgroups"><h2>Today's Lunch Roulettes</h2>{{> TodayList}}
+  </container>
+</template>
+
+<template class='calendar' name="calendar">
+  <container id='Friday' class="days"><h3>Friday</h3>{{> FridayList}}
+  </container>
+  <container id='Saturday' class="days"><h3>Saturday</h3>{{> SaturdayList}}
+  </container>
+  <container id='Sunday' class="days"><h3>Sunday</h3>{{> SundayList}}
+  </container>
+  <container id='Monday' class="days"><h3>Monday</h3>{{> MondayList}}
+  </container>
+  <container id='Tuesday' class="days"><h3>Tuesday</h3>{{> TuesdayList}}
+  </container>
+  <container id='Wednesday' class="days"><h3>Wednesday</h3>{{> WednesdayList}}
+  </container>
+</template>
+
+
+<template name='FridayList'>
+  {{# each FridayPool}}
+    {{> people}}
+  {{/each}}
+</template>
+
+<template name='SaturdayList'>
+  {{# each SaturdayPool}}
+    {{> people}}
+  {{/each}}
+</template>
+
+<template name='SundayList'>
+  {{# each SundayPool}}
+    {{> people}}
+  {{/each}}
+</template>
+
+<template name='MondayList'>
+  {{# each MondayPool}}
+    {{> people}}
+  {{/each}}
+</template>
+
+<template name='TuesdayList'>
+  {{# each TuesdayPool}}
+    {{> people}}
+  {{/each}}
+</template>
+
+<template name='WednesdayList'>
+  {{# each WednesdayPool}}
+    {{> people}}
+  {{/each}}
+</template>
+
+<template name='TodayList'>
+  {{# each TodayPool}}
     {{> people}}
   {{/each}}
 </template>
 
 <template name="people">
-  <h1>{{name}} is down</h1>
-</template>
-
-<template name="grouplist">
-  {{#each groupsMade}}
-    {{> group}}
-  {{/each}}
-</template>
-
-<template name="group">
-  <h1>Group {{number}}</h1>
-  {{people}}
+  <div class='people' >{{name}}</div>
 </template>
