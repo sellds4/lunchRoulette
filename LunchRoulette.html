@@ -10,21 +10,21 @@
 
 <template name="signUp">
     <h1>Welcome to Lunch Roulette</h1>
-  <form>
-    Name: <input type="text" class="name" placeholder="Your Name" />
-    Email: <input type="email" class="email" placeholder="email" />
-    Phone: <input type="text" class="phone" placeholder="##########" />
-    Date: <select type='dropdown' class='day' selected='Pick a day!'>
+  <h4><form>
+    <label class="formlabel">Name:</label><input type="text" class="name span2" placeholder="Your Name" />
+    <label class="formlabel">Email:</label><input type="email" class="email span2" placeholder="email" />
+    <label class="formlabel">Phone:</label><input type="text" class="phone span2" placeholder="##########" />
+    <label class="formlabel">Date:</label><select type='dropdown' class='day span2' selected='Pick a day!'>
               <option value='%s' selected='selected'>Pick a day!</option>
-              <option value="Friday">Friday</option>
-              <option value="Saturday">Saturday</option>
-              <option value="Sunday">Sunday</option>
-              <option value="Monday">Monday</option>
-              <option value="Tuesday">Tuesday</option>
-              <option value="Wednesday">Wednesday</option>
+              <option value="Friday"><label>Friday</label></option>
+              <option value="Saturday"><label>Saturday</label></option>
+              <option value="Sunday"><label>Sunday</label></option>
+              <option value="Monday"><label>Monday</label></option>
+              <option value="Tuesday"><label>Tuesday</label></option>
+              <option value="Wednesday"><label>Wednesday</label></option>
           </select>
-    <button class="submit">submit</button>
-    </form>
+    <button class="submit btn btn-primary">submit</button>
+    </form></h4>
 </template>
 
 <template name="today">
@@ -33,17 +33,17 @@
 </template>
 
 <template class='calendar' name="calendar">
-  <container id='Friday' class="days"><h3>Friday</h3>{{> FridayList}}
+  <container id='Friday' class="days span2"><h3>Friday</h3>{{> FridayList}}
   </container>
-  <container id='Saturday' class="days"><h3>Saturday</h3>{{> SaturdayList}}
+  <container id='Saturday' class="days span2"><h3>Saturday</h3>{{> SaturdayList}}
   </container>
-  <container id='Sunday' class="days"><h3>Sunday</h3>{{> SundayList}}
+  <container id='Sunday' class="days span2"><h3>Sunday</h3>{{> SundayList}}
   </container>
-  <container id='Monday' class="days"><h3>Monday</h3>{{> MondayList}}
+  <container id='Monday' class="days span2"><h3>Monday</h3>{{> MondayList}}
   </container>
-  <container id='Tuesday' class="days"><h3>Tuesday</h3>{{> TuesdayList}}
+  <container id='Tuesday' class="days span2"><h3>Tuesday</h3>{{> TuesdayList}}
   </container>
-  <container id='Wednesday' class="days"><h3>Wednesday</h3>{{> WednesdayList}}
+  <container id='Wednesday' class="days span2"><h3>Wednesday</h3>{{> WednesdayList}}
   </container>
 </template>
 
@@ -86,10 +86,15 @@
 
 <template name='TodayList'>
   {{# each TodayPool}}
-    {{> people}}
+    {{> lunchGroupPeople}}
   {{/each}}
 </template>
 
 <template name="people">
-  <div class='people' >{{name}}</div>
+  <li class='people' >{{name}}</li>
 </template>
+
+<template name="lunchGroupPeople">
+  <li class='groups' >{{group}}{{name}}</li>
+</template>
+

@@ -1,19 +1,69 @@
 /* CSS declarations go here */
 
-.calendar {
-
+h1 {
+  border-bottom-style: dotted;
+  padding-bottom: 10px;
 }
 
+h2 {
+  border-top-style: dotted;
+  padding-bottom: 5px;
+  text-align: center;
+}
+
+h4 {
+  color: red;
+}
+
+.formlabel {
+  display: inline-block;
+  padding-right:10px;
+  padding-left:10px;
+  font-weight: bold;
+  font-size: 100%;
+}
+
+input {
+  margin-top:8px;
+}
+
+body {
+  margin: 10px;
+}
+
+button {
+  margin: 18px;
+  position: relative;
+  top: -10px;
+}
+
+.day {
+  margin-top:8px;
+}
+
+form {
+  padding-top:12px;
+}
+
+.todaysgroup {
+  padding-top:10px;
+}
+
+.groups {
+  list-style: none;
+  text-align: center;
+}
 .people {
-	font-weight: none;
+  font-weight: none;
+  list-style: none;
 }
 
 .days {
-	float: left;
-	position: relative;
-	margin: 20px;
+  float: left;
+  position: relative;
+  margin: 20px;
 }
 
 .hiddenday {
-	display: none;
+  display: none;
 }
