@@ -1,18 +1,26 @@
 /* CSS declarations go here */
 
 h1 {
-  border-bottom-style: dotted;
+  border-bottom-style: solid;
   padding-bottom: 10px;
 }
 
 h2 {
-  border-top-style: dotted;
+  border-top-style: solid;
   padding-bottom: 5px;
   text-align: center;
 }
 
 h4 {
   color: red;
+}
+
+.bottom {
+  position:fixed;
+  top:95%;
+  left: 35%;
+  text-align: center;
+  color:green;
 }
 
 .formlabel {
