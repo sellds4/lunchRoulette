@@ -14,7 +14,6 @@ if (Meteor.isClient) {
 
   Template.signUp.events({
     'click .submit' : function (e) {
-      // template data, if any, is available in 'this'
       var user = {};
       user.name = $('.name').val();
       user.email = $('.email').val();
@@ -68,21 +67,15 @@ if (Meteor.isClient) {
     return names.reverse();
   };
 
-  // Meteor.subscribe('peoplePool', function() {
   Template.calendar.rendered = function(){
     $('#' + today).addClass('hiddenday');
     $('#' + yesterday).removeClass('hiddenday');
   };
-//   });
+
 
 }
 
 if (Meteor.isServer) {
-
-  // for item in peoplePool.find({lunchDay: today}) {
-  //   console.log
-  // }
-
 
   var shuffle = function ( myArray ) {
     var i = myArray.length;
@@ -98,16 +91,13 @@ if (Meteor.isServer) {
   };
 
   Meteor.setInterval(function(){
-    console.log('its time');
     var peeps = peoplePool.find({lunchDay: today}).fetch();
     var groupSize = 3; // this is the ordinary size of a lunch group
     var now = new Date();
-    console.log(now.getHours(), now.getMinutes());
 
     var peepGroup;
 
     if (now.getHours() === 12 && now.getMinutes() === 00) {
-      console.log('working');
       Groups.remove();
       peeps = shuffle(peeps);
       for (var i = 0; i < peeps.length; i += groupSize) {
@@ -120,33 +110,7 @@ if (Meteor.isServer) {
           Groups.insert(peepGroup);
         }
       }
-      console.log(Groups.find({}).fetch());
       return Groups;
     }
   }, 60000);
-
-  // console.log("this is the peoplePool", peoplePool.find({lunchDay: today}).fetch());
-  console.log(Groups.find({}).fetch());
-
 };
-  // TODO: assign a random groupNumber to _.each person in the peoplePool...
-      // constrain the number to math.floor(peeps.length / 3)
-      // render to the DOM based on that random number (extra credit: notify them by SMS)
-
-
-//     var number = Math.floor((Math.random() * peeps.length / 3)sa + 1);
-//     peoplePool.update({lunchDay: today}, { $push : {groupID : number}});  // TODO: fix this
-
-
-
-
-
-
-  //   create groups --> helper function
-  //   send notifications -- helper function
-  //   */
-  // }, millisTill8);
-
-  // Meteor.methods({
-
-  // });
