@@ -6,7 +6,7 @@
   {{> signUp}}
   {{> today}}
   {{> calendar}}
-  <footer class='bottom'>A production of 3 Div Boxes, a Full Liability Corporation</footer>
+  <footer class='bottom'>A production of 3 Div Boxes, a Fully Liable Corporation</footer>
 </body>
 
 <template name="signUp">
@@ -24,16 +24,16 @@
               <option value="Tuesday"><label>Tuesday</label></option>
               <option value="Wednesday"><label>Wednesday</label></option>
           </select>
-    <button class="submit btn btn-primary">submit</button>
+    <button class="submit btn btn-success">submit</button>
     </form></h4>
 </template>
 
 <template name="today">
-  <container class="todaysgroups"><h2>Today's Lunch Roulettes</h2>{{> TodayList}}
+  <container class="todaysgroups container"><h2>Today's Lunch Roulettes</h2>{{> TodayList}}
   </container>
 </template>
 
-<template class='calendar' name="calendar">
+<template class='calendar container' name="calendar">
   <container id='Friday' class="days span2"><h3>Friday</h3>{{> FridayList}}
   </container>
   <container id='Saturday' class="days span2"><h3>Saturday</h3>{{> SaturdayList}}
@@ -86,9 +86,10 @@
 </template>
 
 <template name='TodayList'>
-  {{# each TodayPool}}
-    {{> lunchGroupPeople}}
-  {{/each}}
+  <div class="todaylist container">{{# each TodayPool}}
+    <container class="lunchgroups span2"><h5>Group:</h5>{{> lunchGroupPeople}}
+    </container>
+  {{/each}}</div>
 </template>
 
 <template name="people">
@@ -96,5 +97,7 @@
 </template>
 
 <template name="lunchGroupPeople">
-  <li class='groups' >{{group}}{{name}}</li>
+  {{# each this}}
+    <li>{{name}}</li>
+  {{/each}}
 </template>

@@ -54,17 +54,28 @@ if (Meteor.isClient) {
     var names = [];
 
     var todayGrps = Groups.find().fetch();
-    for(var key in todayGrps){
-      for(var k in todayGrps[key]){
-        if (typeof todayGrps[key][k] === 'string'){
-          names.push({name: 'Lunch Group:'})
-        } else {
-          names.push(todayGrps[key][k]);
+    for(var i = 0; i < todayGrps.length; i++) {
+      groupArray = [];
+      for(var key in todayGrps[i]) {
+        console.log(todayGrps[i][key]);
+        if(typeof todayGrps[i][key] !== 'string') {
+          groupArray.push(todayGrps[i][key]);
         }
-
       }
+    names.push(groupArray);
     }
-    return names.reverse();
+    // for(var key in todayGrps){
+    //   for(var k in todayGrps[key]){
+    //     if (typeof todayGrps[key][k] === 'string'){
+    //       names.push({name: 'Lunch Group:'})
+    //     } else {
+    //       names.push(todayGrps[key][k]);
+    //     }
+
+    //   }
+    // }
+    console.log(names);
+    return names;
   };
 
   Template.calendar.rendered = function(){
@@ -97,8 +108,8 @@ if (Meteor.isServer) {
 
     var peepGroup;
 
-    if (now.getHours() === 12 && now.getMinutes() === 00) {
-      Groups.remove();
+    if (true) {
+      Groups.remove({});
       peeps = shuffle(peeps);
       for (var i = 0; i < peeps.length; i += groupSize) {
         if (peeps.length - i === groupSize + 1) {
@@ -112,5 +123,5 @@ if (Meteor.isServer) {
       }
       return Groups;
     }
-  }, 60000);
-};
+  }, 6000);
+}
