@@ -4,7 +4,7 @@
 
 <body>
   {{> signUp}}
-  {{> today}}
+  {{> Today}}
   {{> calendar}}
   <footer class='bottom'>A production of 3 Div Boxes, a Fully Liable Corporation</footer>
 </body>
@@ -14,7 +14,7 @@
   <h4><form>
     <label class="formlabel">Name:</label><input type="text" class="name span2" placeholder="Your Name" />
     <label class="formlabel">Email:</label><input type="email" class="email span2" placeholder="email" />
-    <label class="formlabel">Phone:</label><input type="text" class="phone span2" placeholder="##########" />
+    <label class="formlabel">Phone:</label><input type="text" class="phone span2" placeholder="555-555-5555" />
     <label class="formlabel">Date:</label><select type='dropdown' class='day span2' selected='Pick a day!'>
               <option value='%s' selected='selected'>Pick a day!</option>
               <option value="Friday"><label>Friday</label></option>
@@ -28,9 +28,9 @@
     </form></h4>
 </template>
 
-<template name="today">
-  <container class="todaysgroups container"><h2>Today's Lunch Roulettes</h2>{{> TodayList}}
-  </container>
+<template name="Today">
+    <container class="todaysgroups container"><h2>{{day}}'s Lunch Roulettes</h2>{{> TodayList}}
+    </container>
 </template>
 
 <template class='calendar container' name="calendar">
@@ -85,19 +85,27 @@
   {{/each}}
 </template>
 
-<template name='TodayList'>
-  <div class="todaylist container">{{# each TodayPool}}
-    <container class="lunchgroups span2"><h5>Group:</h5>{{> lunchGroupPeople}}
-    </container>
-  {{/each}}</div>
-</template>
-
 <template name="people">
   <li class='people' >{{name}}</li>
 </template>
 
+<template name='TodayList'>
+  <div class="todaylist container">
+    {{#each TodayPool}}
+      <container class="lunchGroups span2">
+        <h5>Location:</h5> {{> lunchGroupPlaces}}
+        <h5>Group:</h5>{{> lunchGroupPeople}}
+      </container>
+    {{/each}}
+  </div>
+</template>
+
 <template name="lunchGroupPeople">
-  {{# each this}}
-    <li>{{name}}</li>
-  {{/each}}
+    {{#each people}}
+      <li>{{name}}</li>
+    {{/each}}
+</template>
+
+<template name='lunchGroupPlaces'>
+    <li>{{place}}</li>
 </template>

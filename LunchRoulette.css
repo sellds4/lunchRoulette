@@ -23,6 +23,15 @@ h4 {
   margin-right:auto;
 }
 
+.lunchGroups {
+  display: inline-block;
+  list-style: none;
+  float: left;
+  position: relative;
+  margin: 20px;
+  text-align:center;
+}
+
 .bottom {
   position:fixed;
   top:95%;

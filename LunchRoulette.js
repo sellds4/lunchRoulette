@@ -3,6 +3,8 @@
 
   var Groups = new Meteor.Collection('Groups');
 
+  var Places = ['Mall Food Court', 'Mexican', 'Little Delhi', 'Pearl\'s Burgers', 'Super Duper'];
+
   var date = new Date();
   var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -25,6 +27,10 @@ if (Meteor.isClient) {
       e.preventDefault();
     }
   });
+
+  Template.Today.day = function () {
+    return today;
+  };
 
   Template.FridayList.FridayPool = function() {
     return peoplePool.find({lunchDay : 'Friday'});
@@ -51,38 +57,14 @@ if (Meteor.isClient) {
   };
 
   Template.TodayList.TodayPool = function() {
-    var names = [];
-
-    var todayGrps = Groups.find().fetch();
-    for(var i = 0; i < todayGrps.length; i++) {
-      groupArray = [];
-      for(var key in todayGrps[i]) {
-        console.log(todayGrps[i][key]);
-        if(typeof todayGrps[i][key] !== 'string') {
-          groupArray.push(todayGrps[i][key]);
-        }
-      }
-    names.push(groupArray);
-    }
-    // for(var key in todayGrps){
-    //   for(var k in todayGrps[key]){
-    //     if (typeof todayGrps[key][k] === 'string'){
-    //       names.push({name: 'Lunch Group:'})
-    //     } else {
-    //       names.push(todayGrps[key][k]);
-    //     }
-
-    //   }
-    // }
-    console.log(names);
-    return names;
+    console.log('the objects', Groups.find().fetch())
+    return Groups.find().fetch();
   };
 
   Template.calendar.rendered = function(){
     $('#' + today).addClass('hiddenday');
     $('#' + yesterday).removeClass('hiddenday');
   };
-
 
 }
 
@@ -103,24 +85,29 @@ if (Meteor.isServer) {
 
   Meteor.setInterval(function(){
     var peeps = peoplePool.find({lunchDay: today}).fetch();
-    var groupSize = 3; // this is the ordinary size of a lunch group
+    var groupSize = 3; // this is the suggested size of a lunch group
     var now = new Date();
+    var randomPlace;
 
     var peepGroup;
 
     if (true) {
+    // if (now.getHours() === 12 && now.getMinutes() === 00) {
       Groups.remove({});
       peeps = shuffle(peeps);
       for (var i = 0; i < peeps.length; i += groupSize) {
         if (peeps.length - i === groupSize + 1) {
           peepGroup = peeps.slice(i, peeps.length);
-          peoplePool.remove({lunchDay: today});
-          return Groups.insert(peepGroup);
+          randomPlace = Places[Math.floor(Math.random() * Places.length)];
+          // peoplePool.remove({lunchDay: today});
+          return Groups.insert({lunchDay : today, place : randomPlace, people : peepGroup});
         } else {
           peepGroup = peeps.slice(i, i+groupSize);
-          Groups.insert(peepGroup);
+          randomPlace = Places[Math.floor(Math.random() * Places.length)];
+          Groups.insert({lunchDay : today, place : randomPlace, people : peepGroup});
         }
       }
+      // peoplePool.remove({lunchDay: today});
       return Groups;
     }
   }, 6000);
