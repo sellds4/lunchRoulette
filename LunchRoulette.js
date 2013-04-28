@@ -57,7 +57,6 @@ if (Meteor.isClient) {
   };
 
   Template.TodayList.TodayPool = function() {
-    console.log('the objects', Groups.find().fetch())
     return Groups.find().fetch();
   };
 
@@ -86,20 +85,18 @@ if (Meteor.isServer) {
   Meteor.setInterval(function(){
     var peeps = peoplePool.find({lunchDay: today}).fetch();
     var groupSize = 3; // this is the suggested size of a lunch group
-    var now = new Date();
     var randomPlace;
 
     var peepGroup;
 
-    if (true) {
-    // if (now.getHours() === 12 && now.getMinutes() === 00) {
+    if (date.getHours() === 20 && date.getMinutes() === 00) {
       Groups.remove({});
       peeps = shuffle(peeps);
       for (var i = 0; i < peeps.length; i += groupSize) {
         if (peeps.length - i === groupSize + 1) {
           peepGroup = peeps.slice(i, peeps.length);
           randomPlace = Places[Math.floor(Math.random() * Places.length)];
-          // peoplePool.remove({lunchDay: today});
+          peoplePool.remove({lunchDay: today});
           return Groups.insert({lunchDay : today, place : randomPlace, people : peepGroup});
         } else {
           peepGroup = peeps.slice(i, i+groupSize);
@@ -107,7 +104,7 @@ if (Meteor.isServer) {
           Groups.insert({lunchDay : today, place : randomPlace, people : peepGroup});
         }
       }
-      // peoplePool.remove({lunchDay: today});
+      peoplePool.remove({lunchDay: today});
       return Groups;
     }
   }, 6000);
