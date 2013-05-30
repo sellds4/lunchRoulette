@@ -1,16 +1,10 @@
-
-  var peoplePool = new Meteor.Collection('peoplePool');
-
-  var Groups = new Meteor.Collection('Groups');
-
-  var Places = ['Mall Food Court', 'Mexican', 'Little Delhi', 'Pearl\'s Burgers', 'Super Duper'];
-
-  var date = new Date();
-  var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-  var today = weekdays[date.getDay()];
-  var yesterday = date.getDay() > 0 ? weekdays[date.getDay() - 1] : weekdays[6];
-
+var peoplePool = new Meteor.Collection('peoplePool'),
+    Groups = new Meteor.Collection('Groups'),
+    Places = ['Mall Food Court', 'Mexican', 'Little Delhi', 'Pearl\'s Burgers', 'Super Duper'],
+    date = new Date(),
+    weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    today = weekdays[date.getDay()],
+    yesterday = date.getDay() > 0 ? weekdays[date.getDay() - 1] : weekdays[6];
 
 if (Meteor.isClient) {
 
